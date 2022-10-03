@@ -33,6 +33,7 @@ jobs:
         id: scan
         with:
           image: "spiroskafk/cicd-test"
+          fail-build: false
 
       - name: Upload Anchore scan sarif report
         uses: github/codeql-action/upload-sarif@v2
