@@ -1,14 +1,10 @@
 name: Falcon CI
 
-on: pull_request
+on:  
 
 jobs:
   builds: 
     runs-on: ubuntu-latest
-    permissions:
-      checks: write
-      pull-requests: write
-      contents: read
     steps:
       - uses: actions/checkout@v3
 
@@ -17,14 +13,13 @@ jobs:
           python-version: '3.9'
           cache: 'pip'
 
-      # Seperate step, just a run command
       - run: pip install -r requirements.txt
 
       - name: Docker build and run
         run: |
           docker build . -t spiroskafk/cicd-test
           docker run -dit -p 8000:8000 spiroskafk/cicd-test
-
+          
       - name: Test code
         run: coverage run -m pytest tests/
 
@@ -74,9 +69,4 @@ jobs:
           Job: ${{ github.job }}"
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-      - uses: smelly-python/smell-my-pr@main
-        with:
-          github-token: ${{secrets.GITHUB_TOKEN}}
-          command: pipenv run smelly-python -d src
 
