@@ -5,6 +5,10 @@ on: pull_request
 jobs:
   builds: 
     runs-on: ubuntu-latest
+    permissions:
+      checks: write
+      pull-requests: write
+      contents: read
     steps:
       - uses: actions/checkout@v3
 
@@ -71,10 +75,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-  linter:
-    runs-on: ubuntu-latest
-      - name: Black
-        uses: dciborow/pyaction@0.0.13
+      - uses: smelly-python/smell-my-pr@main
         with:
-          black: true
+          github-token: ${{secrets.GITHUB_TOKEN}}
+          command: pipenv run smelly-python -d src
 
