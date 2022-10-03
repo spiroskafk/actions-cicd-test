@@ -1,7 +1,5 @@
 name: Falcon CI
 
-on:  
-
 jobs:
   builds: 
     runs-on: ubuntu-latest
