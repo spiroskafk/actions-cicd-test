@@ -71,3 +71,9 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
+
+      - name: Black
+        uses: dciborow/pyaction@0.0.13
+        with:
+          black: true
+
