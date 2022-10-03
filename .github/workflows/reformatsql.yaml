@@ -6,7 +6,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
         with:
-        fetch-depth: 0
+          fetch-depth: 0
       # Run the reformat action
       - name: Reformat SQL Files
         uses: credfeto/action-yaml-format@v1.3.1
